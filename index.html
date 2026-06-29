@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1 id="count">Loading...</h1>
+  <button onclick="increase()">Increase</button>
+  <button onclick="restart()">Restart</button>
+
+  <script>
+    const API = "http://localhost:8000/counter"
+
+    async function load() {
+      const res = await fetch(API)
+      const data = await res.json()
+      document.getElementById("count").textContent = data.count
+    }
+
+    async function increase() {
+      const res = await fetch(`${API}/increase`, { method: "POST" })
+      const data = await res.json()
+      document.getElementById("count").textContent = data.count
+    }
+
+    async function restart() {
+      const res = await fetch(`${API}/restart`, { method: "POST" })
+      const data = await res.json()
+      document.getElementById("count").textContent = data.count
+    }
+
+    load()
+  </script>
+</body>
+</html>
