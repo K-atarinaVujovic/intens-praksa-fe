@@ -7,26 +7,20 @@
 
   <script>
     const API = "http://localhost:8000/counter"
+    const ws = new WebSocket("ws://localhost:8000/counter/ws")
 
-    async function load() {
-      const res = await fetch(API)
-      const data = await res.json()
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data)
       document.getElementById("count").textContent = data.count
     }
 
     async function increase() {
-      const res = await fetch(`${API}/increase`, { method: "POST" })
-      const data = await res.json()
-      document.getElementById("count").textContent = data.count
+      await fetch(`${API}/increase`, { method: "POST" })
     }
 
     async function restart() {
-      const res = await fetch(`${API}/restart`, { method: "POST" })
-      const data = await res.json()
-      document.getElementById("count").textContent = data.count
+      await fetch(`${API}/restart`, { method: "POST" })
     }
-
-    load()
   </script>
 </body>
 </html>
