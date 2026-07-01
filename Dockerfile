@@ -16,4 +16,4 @@ COPY . .
 EXPOSE 3000
 
 # Run the application.
-CMD npx serve .
+CMD node server.js

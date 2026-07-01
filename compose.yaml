@@ -4,6 +4,7 @@ services:
       context: .
     environment:
       NODE_ENV: production
+      PORT: 3000
+      BACKEND_URL: localhost:8000
     ports:
       - 3000:3000
-

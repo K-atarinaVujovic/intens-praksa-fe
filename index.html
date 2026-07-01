@@ -6,8 +6,9 @@
   <button onclick="restart()">Restart</button>
 
   <script>
-    const API = "http://localhost:8000/counter"
-    const ws = new WebSocket("ws://localhost:8000/counter/ws")
+    const HOST = "__API_HOST__"
+    const API = `http://${HOST}/counter`
+    const ws = new WebSocket(`ws://${HOST}/counter/ws`)
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data)
