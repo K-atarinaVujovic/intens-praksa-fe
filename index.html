@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h1 id="count">Loading...</h1>
+  <button onclick="increase()">Increase</button>
+  <button onclick="restart()">Restart</button>
+
+  <script>
+    const HOST = "__API_HOST__"
+    const API = `http://${HOST}/counter`
+    const ws = new WebSocket(`ws://${HOST}/counter/ws`)
+
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data)
+      document.getElementById("count").textContent = data.count
+    }
+
+    async function increase() {
+      await fetch(`${API}/increase`, { method: "POST" })
+    }
+
+    async function restart() {
+      await fetch(`${API}/restart`, { method: "POST" })
+    }
+  </script>
+</body>
+</html>
